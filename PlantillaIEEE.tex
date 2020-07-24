@@ -71,12 +71,14 @@ En un sistema inform\'atico tipico existen muchos procesos concurrentes que comp
 \subsection{Multiprogramaci\'on}
 Planteamos la siguiente situación, en una oficina de correos un usuario X se une a una cola de atención para recibir su pedido, luego de un tiempo transcurrido finalmente llega su turno, pero su envío aún no está preparado para su despacho entonces lo pasan a un lado a la espera que su envío sea empacado mientras tanto otro cliente es atendido, esta idea aunque simple nos permite mostrar  la idea básica de la multiprogración que se busca que la atención no se detenga sino que se fluya a pesar de estos tipos de incovenientes.\\
 
-Análogamente al ejemplo anterior, algo muy similar ocurre con el concepto de multiprogramación, por ejemplo, en un sistema operativo cuando hay uno o mas programas listos para ejecutarse en la memoria principal, como la CPU solo puede hacer la ejecución de un programa, la idea es tener un sistema multiprogramado para que se pueda optimizar el tiempo del CPU. El sistema operativo puede tener varios tipos de interrupciones como la espera de IO, el transferimiento de control a otro cliente entre otros, por eso uno de los objetivos de la multiprogramación es que los procesos que esperan IO no deban bloquear otros procesos que a su vez generan mas desperdicio de tiempo haciendolo ineficiente.\\
+An\'{a}logamente al ejemplo anterior, algo muy similar ocurre con  el  concepto  de  multiprogramaci\'{o}n,  por  ejemplo,  en  un sistema  operativo  cuando  hay  uno  o  m\'{a}s  programas  listos para  ejecutarse  en  la  memoria  principal,  como  la  CPU  s\'{o}lo puede  hacer  la  ejecuci\'{o}n  de  un  programa,  la  idea  es  tener un  sistema  multiprogramado  para  que  se  pueda  optimizar  el tiempo del CPU. El sistema operativo puede tener varios tipos de  interrupciones  como  la  espera  de  IO,  el  transferimiento de  control  a  otro  cliente  entre  otros,  por  eso  uno  de  los objetivos   de   la   multiprogramaci\'{o}n   es   que   los   procesos que  esperan  IO  no  deban  bloquear  otros  procesos  que  a  su vez generan m\'{a}s desperdicio de tiempo haci\'{e}ndolo ineficiente.\\
 
-Hay que tener en cuenta tambien los problemas que puede abordar el cargar varios programas en la memoria principal como lo es fragmentación o tambien cuando un programa sea mas grande que la memoria( lo cual se puede solucionar a traves del uso de la memoria virtual). En resumen la multiprogramación permite que múltiples procesos residan en la memoria principal y tiene como objetivo principal optimizar la utilización  de la CPU reduciendo el tiempo de inactividad de esta.\\
+Hay que tener en cuenta tambi\'{e}n los problemas que puede abordar  el  cargar  varios programas  en  la  memoria  principal como  lo  es  fragmentaci\'{o}n  o  tambi\'{e}n  cuando  un  programa sea m\'{a}s grande que la memoria( lo cual se puede solucionar a  trav\'{e}s  del  uso  de  la  memoria  virtual).  En  resumen  la multiprogramaci\'{o}n  permite  que  m\'{u}ltiples  procesos  residan en  la  memoria  principal  y  tiene  como  objetivo  principal optimizar  la  utilizaci\'{o}n  de  la  CPU  reduciendo  el  tiempo  de inactividad de esta.\\
 
 \subsection{Multiprocesamiento}
-Se refiere a las unidades de CPU que el sistema puede contar, si el hardware proporciona mas de un procesador, entonces usamos el termino \textbf{Multiprocesamiento}, puede haber variaciones en el esquema basico como tener multiples nucleos, dados o paquetes en el sistema.
+Se  refiere a  las  unidades de  CPU  que  el  sistema  puede contar,  si  el  hardware  proporciona  m\'{a}s  de  un  procesador,entonces  usamos  el  t\'{e}rmino \textbf{Multiprocesamiento},  puede  haber  variaciones  en  el  esquema  b\'{a}sico  como  tener  m\'{u}ltiples n\'{u}cleos, dados o paquetes en el sistema.
+
+
 
 \subsection{Multitarea}
 Este termino es usado en los sistemas operativos modernos en el cual se refiere cuando varias tareas comparten un recurso de procesamiento comun, tambien se refiere a la ilusion de paralelismo cuando la CPU reasigna a otra tarea (cambio de contexto), hay que tener en cuenta que una tarea en un sistema multitarea no es un programa de aplicacion completo ya que los sistemas operativos modernos cuentan con su division en paginas logicas. Se puede decir que la multitarea y la multiprogramacion tienen un concepto similar la cual es el compartimiento del tiempo del CPU.
@@ -156,7 +158,28 @@ Una de las herramientas que se utilizan en los sistemas multiprocesadores es el 
 \end{itemize}
 
 \section{Estado del Arte}
-Con los dos metodos mencionados anteriormente, puede mejorarse el modelo de servidor - esclavo que se propone, veamos como el modelo Round Robin puede ayudar.
+En el planteamiento de este proyecto, ademas de las herramientas que tenemos a nuestra disposicion, debemos usar metodos que nos ayuden incrementar la eficiencia del sistema, entre estos tenemos los algoritmos de planificacion los cuales sobresalen los siguientes:
+
+\begin{enumerate}
+    \item \textbf{Algoritmo de planificacion basado en timestamp}.
+    \item \textbf{Algoritmo de planificacion basado en Round Robin}.
+    \item \textbf{Algoritmos hibridos}
+\end{enumerate}
+
+Debido a que nos enfocamos en el segundo tipo de algoritmo de planificacion veamos como funciona, para empezar este algoritmo asigna una ranura de tiempo a cada flujo y hace que los envios de paquetes sea de forma alternada, Por ejemplo, si se tuvieran 3 colas (Q1, Q2 y
+Q3) a cada una de estas colas se le asigna una ranura de tiempo de duración tiempo t1, entonces el algoritmo comenzaria a enviar los paquetes de Q1 durante el tiempo t1, luego de eso comienza a enviar paquetes de la cola Q2 durante el mismo tiempo y finamente envia paquetes de la cola Q3 durante un mismo tiempo y si aun no termina los paquetes vuelve de nuevo a la cola Q1 y asi hasta que se acabe los paquetes de las tres colas. A pesar que Round Robin tiene una mejor distribucion de los labores, tiene una respuesta muy pobre con respecto al retraso de cada paquete obtenido.
+
+\subsection{Weight Round Robin (WRR)}
+Este algoritmo es una modificacion del Round Robin en el cual solo se envia un paquete por cola en cada turno, este funcionamiento se da por cada flujo en el cual se le da un peso en parte de ancho de banda, entonces, el número de paquetes a enviar en cada turno se calcula con base en el peso del flujo y en la capacidad del enlace.
+
+WRR funciona bien en el envío de paquetes de tamaño fijo, sin embargo,
+presenta problemas de desempeño en los paquetes que son de longitud variable, por ejemplo, en el caso de paquetes de tamaño mayor, este utiliza más ancho de banda de lo que deberia asignarse, lo cual hace que el desempeño en el envío de paquetes de las otras colas disminuya, un ejemplo claro de este tipo de algoritmo encontramos en los dispositivos de interconectividad Huawei en los cuales se manejan ocho colas en el que se les asigna un determinado porcentaje de ancho de banda.
+
+\subsection{Deficit Round Robin}
+Este algoritmo mejora las dificultades de WRR y ahora permite enviar paquetes de diferentes longitudes, tiene dos variables, una es el \textbf{quantum} que indica la cantidad de bits a enviar en cada turno y la otra variable es el \textbf{contador de deficit} que se encarga de almacenar el valor del quantum obtenido.
+
+El funcionamiento de este algoritmo comienza enviando paquetes de colas que tengan por mandar, si el tamaño de este paquete es menor o igual al valor del quantum, el paquete es enviado sino el paquete debe esperar a ser transmitido a otro turno, es ahi donde entra el deficit counter, lo que hace iniciar su cola e incrementa su valor por cada paquete que no es enviado debido a la condicional del quantum, cuando el deficit counter llega a su tope o limite de paquetes estas son enviadas a procesarse y el deficit counter vuelve a cero
+
 
 De acuerdo con algunos articulos cientificos el metodo Round Robin es utilizado en modelos de metodologia empirica, la cual propone un modelo matematico en una comparacion de un evento con su numero de participantes (ejemplo de una liga de futbol con su numero de participantes).
 
@@ -169,7 +192,7 @@ De acuerdo con algunos articulos cientificos el metodo Round Robin es utilizado 
 
 Considerando el ejemplo anterior donde se utiliza el metodo doble Round Robin, el analisis de este ejemplo considera que en todo torneo o liga hay un porcentaje de desequilibrio en el balance competitivo. Algunos investigadores destacan la posibilidad de utilizar metodos estadisticas para buscar diferencias significativas entre las medias de los distintos torneos.
 
-\section{Metodologia o diseño del proyecto}
+\section{Metodolog\'ia o diseño del proyecto}
 El proyecto consiste en la distribucion de cargas a traves de un proceso Servidor (maestro) y los otros procesos seran aquellos que  trabajen las cargas (esclavos), para plasmar esta idea en codigo se propone hacerlo en lenguaje java donde se compondra de dos partes:
 
 \begin{itemize}
@@ -177,7 +200,7 @@ El proyecto consiste en la distribucion de cargas a traves de un proceso Servido
     \item \textbf{Cliente}: Se encargara de la ejecucion de las tareas que se den y una vez resuelta esta devolvera al servidor.
 \end{itemize}
 
-
+El programa Servidor - cliente estara codificado en lenguaje java utilizando la herramienta de los sockets para la comunicacion, ya que esto nos permite mandar mensajes a otras maquinas a traves de la conexion TCP, eso quiere decir que el servidor esperara que los "esclavos" respondan para que puedan procesar sus tareas, dependiendo de lo que el Servidor les mande hacer.
 \section{Conclusiones}
 Se propuso la estructura y forma del proyecto, los cuales estaran en constantes pruebas para obtener una buena distribucion de cargas.\\
 
@@ -191,10 +214,10 @@ Se mostro un modelo ejemplo de como se puede utilizar el metodo Round Robin para
 Franck, E. (2014), \emph{Financial fair play in European football clubs: What is it all about? International Journal of Sports Finance, 9(3), 193-217.}
 \\
 \bibitem{}
-Haan, M., Koning, R. H., & Witteloostuijn, A. (2007), \emph{Competitive balance in national European soccer competitions. In J. Albert, & R. H. Koning (Eds.). Statistical thinking in sports (Chap. 4, pp. 63-76). London: Taylor and Francis.}
+Haan, M., Koning, R. H., & Witteloostuijn, A. (2007), \emph{Competitive balance in national European soccer competitions. In J. Albert, R. H. Koning (Eds.). Statistical thinking in sports (Chap. 4, pp. 63-76). London: Taylor and Francis.}
 \\
 \bibitem{}
-Levin, R., Mitchell, G., Volcker, P., & Will, G. (2000), \emph{The report of the independent members of the Comissioner’s Blue Ribbon Panel on baseball economics},\\ Recuperado en: 
+Levin, R., Mitchell, G., Volcker, P. Will, G. (2000), \emph{The report of the independent members of the Comissioners Blue Ribbon Panel on baseball economics},\\ Recuperado en: 
 \url{http://www.mlb.com/mlb/downloads/blue\_ribbon.pdf}
 \\
 \bibitem{}
@@ -207,5 +230,7 @@ Jianhua Sun, \emph{Associate Professor at the College of Computer Science and El
 Víctor M. Alfaro Ruíz, \emph{Métodos de sintonización de controladores PID que operan como reguladores}, San José, Costa Rica, 2002.\\ Disponible en: 
 \url{http://eie.ucr.ac.cr/uploads/file/documentos/pub_inv/articulos/valfaro02B.pdf}
 
+\bibitem{}
+Knightson, K. Morita, N., Towle T. NGN Architecture: Generic \emph{Principles, Funcional Architecture, and Implementation. IEEE Communications Magazine}. Octubre 2005.
 \end{thebibliography}
 \end{document}
