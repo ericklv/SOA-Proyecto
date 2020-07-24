@@ -97,9 +97,9 @@ Para esta sección presentaremos los algoritmos o soluciones (secciones) que ten
 Es un método que selecciona un grupo de manera equitativa y en orden racional, que recorre desde el primero hasta el último y si no se finalizaron los trabajos, se vuelve a repetir el ciclo hasta que terminen todos los trabajos, una característica principal de este m\'etodo es el uso del \textbf{quantum}, el cual es un número fijo de pulsos o ciclos de reloj, debido a esto el quantum debe fijarse en un cierto tamaño de modo que la mayoría de peticiones o trabajos requieran menos tiempo que la duración del cuanto. Otras características que puede presentar son:
 
 \begin{itemize}
-    \item Cuando se genera una interrupcion, el proceso que esta en ejecucion se traslada a una cola de lista y se selecciona el siguiente trabajo.
-    \item Esta diseñado especialmente para sistemas de tiempo compartido.
-    \item Para un parametro critico, su efectividad dependera del tamaño del cuanto pero hay que tener en cuenta el tiempo que se dedica al cambio de contexto
+    \item Cuando se genera una interrupción, el proceso que está en ejecución se traslada a una cola de lista y se selecciona el siguiente trabajo.
+    \item Está diseñado especialmente para sistemas de tiempo compartido.
+    \item Para un parámetro crítico, su efectividad depende del tamaño del cuanto pero hay que tener en cuenta el tiempo que se dedica al cambio de contexto.
 \end{itemize}
 
 \begin{figure}[thpb]
@@ -109,23 +109,23 @@ Es un método que selecciona un grupo de manera equitativa y en orden racional, 
       \label{fig:RR}
 \end{figure}
 
-Los conceptos a tener en cuenta en el algoritmo de este metodo son:
+Los conceptos a tener en cuenta en el algoritmo de este método son:
 \begin{enumerate}
-    \item \textbf{Quantum}: Numero maximo de intervalos de tiempo que un proceso puede usar la CPU.
+    \item \textbf{Quantum}: Número máximo de intervalos de tiempo que un proceso puede usar la CPU.
     \item \textbf{Tiempo de llegada}: Intervalo de tiempo en que comienza el proceso.
     \item \textbf{Tiempo de ejecucion o Rafaga}: Intervalo de tiempo que demora un proceso en ejecutarse.
     \item \textbf{Tiempo de finalizacion}: Intervalo de tiempo en que termina el proceso.
-    \item \textbf{Tiempo de retorno}: Suma de intervalos que mide desde que comienza el proceso hasta que finaliza su ejecucion.
+    \item \textbf{Tiempo de retorno}: Suma de intervalos que mide desde que comienza el proceso hasta que finaliza su ejecución.
 \end{enumerate}
 
 \subsection{Tablas Hash}
-Otro proposicion que podriamos hacer, pero no asegurar es la utilizacion de tablas hash, la cual es un contenedor asociativo que permite el almacenamiento de entradas con una clave unica para luego ser recuperadas posteriormente de manera eficiente, debido a que la clave es unica para cada entrada entonces se puede usar a esta clave como un identificador.
+Otra proposición que podríamos hacer, pero no asegurar es la utilización de tablas hash, la cual es un contenedor asociativo que permite el almacenamiento de entradas con una clave única para luego ser recuperadas posteriormente de manera eficiente, debido a que la clave es única para cada entrada entonces se puede usar a esta clave como un identificador.
 
-Su estructura hace que la recuperacion de informacion sea eficiente con un tiempo constante, sin embargo, esta tabla hash frecuentemente se producen colisiones, esto se pasa generalmente cuando una clave se genera para dos entradas, sin embargo esto tiene solucion gracias a que ya cuenta con una funcion de resoluciones de colisiones, por eso existen dos tipos de tablas hash en funcion a como se resulven sus colisiones:
+Su estructura hace que la recuperación de información sea eficiente con un tiempo constante, sin embargo, esta tabla hash frecuentemente se producen colisiones, esto se pasa generalmente cuando una clave se genera para dos entradas, sin embargo esto tiene solución gracias a que ya cuenta con una función de resoluciones de colisiones, por eso existen dos tipos de tablas hash en función a cómo se resuelven sus colisiones:
 
 \begin{itemize}
-    \item Encadenamiento separado: Las colisiones se resuelven insertandolas en una lista.
-    \item Direccionamiento abierto: Se usa un vector como representacion y cuando ocurre la colision, le volvemos a reasignar otra clave no repetida.
+    \item Encadenamiento separado: Las colisiones se resuelven insertándolas en una lista.
+    \item Direccionamiento abierto: Se usa un vector como representación y cuando ocurre la colisión, le volvemos a reasignar otra clave no repetida.
 \end{itemize}
 
 \begin{figure}[thpb]
@@ -139,11 +139,11 @@ Las operaciones que se pueden utilizar en una tabla hash son:
 \begin{itemize}
     \item Insertar: Puede ser un valor entero o una cadena de caracteres.
     \item Borrar: Si uno quiere borrar un nodo debe seleccionar dicho nodo.
-    \item Vaciado de lista: Elimina todos los elementos de la tabla
+    \item Vaciado de lista: Elimina todos los elementos de la tabla.
 \end{itemize}
 
 \subsection{Teor\'ia de Colas}
-Una de las herramientas que se utilizan en los sistemas multiprocesadores es el uso de colas, la cual se define como un fen\'omeno matem\'atico y tiene una gran cantidad de aplicaciones en diferentes ramas como Ciencias M\'edicas, Ciencias de la Gesti\'on, Sistemas inform\'aticos y econometria. Segun el modelo de teor\'ia de colas, esta surge con el prop\'osito de predecir algunas medidas de rendimiento en la computadoras, ya que esta se enmarca en estimar los tiempos de espera y la longitud de la cola. Segun la teor\'ia de colas que pertenece a la rama de Investigaci\'on de operaciones, estas utilizan los recursos para ofrecer el servicio dependiendo de la decision comercial que pueda tener el modelo. Para estos modelos existen \textbf{Sistemas Multiservidor de cola m\'ultiple} y el \textbf{Sistema de cola de Servidor \'unico de cola m\'ultiple}, ambas cuentan con las siguientes caracter\'isticas:
+Una de las herramientas que se utilizan en los sistemas multiprocesadores es el uso de colas, la cual se define como un fen\'omeno matem\'atico y tiene una gran cantidad de aplicaciones en diferentes ramas como Ciencias Médicas, Ciencias de la Gestión, Sistemas inform\'aticos y econometría. Según el modelo de teoría de colas, esta surge con el propósito de predecir algunas medidas de rendimiento en las computadoras, ya que esta se enmarca en estimar los tiempos de espera y la longitud de la cola. Según la teoría de colas que pertenece a la rama de Investigación de operaciones, estas utilizan los recursos para ofrecer el servicio dependiendo de la decisión comercial que pueda tener el modelo. Para estos modelos existen \textbf{Sistemas Multiservidor de cola múltiple} y el \textbf{Sistema de cola de Servidor único de cola múltiple}, ambas cuentan con las siguientes características:
 
 \begin{itemize}
     \item Promedio de la tasa de llegada.
@@ -156,55 +156,53 @@ Una de las herramientas que se utilizan en los sistemas multiprocesadores es el 
 \end{itemize}
 
 \section{Estado del Arte}
-En el planteamiento de este proyecto, ademas de las herramientas que tenemos a nuestra disposicion, debemos usar metodos que nos ayuden incrementar la eficiencia del sistema, entre estos tenemos los algoritmos de planificacion los cuales sobresalen los siguientes:
+En el planteamiento de este proyecto, además de las herramientas que tenemos a nuestra disposición, debemos usar métodos que nos ayuden incrementar la eficiencia del sistema, entre estos tenemos los algoritmos de planificación los cuales sobresalen los siguientes:
 
 \begin{enumerate}
-    \item \textbf{Algoritmo de planificacion basado en timestamp}.
-    \item \textbf{Algoritmo de planificacion basado en Round Robin}.
-    \item \textbf{Algoritmos hibridos}
+    \item \textbf{Algoritmo de planificación basado en timestamp}.
+    \item \textbf{Algoritmo de planificación basado en Round Robin}.
+    \item \textbf{Algoritmos híbridos}
 \end{enumerate}
 
-Debido a que nos enfocamos en el segundo tipo de algoritmo de planificacion veamos como funciona, para empezar este algoritmo asigna una ranura de tiempo a cada flujo y hace que los envios de paquetes sea de forma alternada, Por ejemplo, si se tuvieran 3 colas (Q1, Q2 y
-Q3) a cada una de estas colas se le asigna una ranura de tiempo de duración tiempo t1, entonces el algoritmo comenzaria a enviar los paquetes de Q1 durante el tiempo t1, luego de eso comienza a enviar paquetes de la cola Q2 durante el mismo tiempo y finamente envia paquetes de la cola Q3 durante un mismo tiempo y si aun no termina los paquetes vuelve de nuevo a la cola Q1 y asi hasta que se acabe los paquetes de las tres colas. A pesar que Round Robin tiene una mejor distribucion de los labores, tiene una respuesta muy pobre con respecto al retraso de cada paquete obtenido.
+Debido a que nos enfocamos en el segundo tipo de algoritmo de planificación veamos como funciona, para empezar este algoritmo asigna una ranura de tiempo a cada flujo y hace que los envíos de paquetes sea de forma alternada, Por ejemplo, si se tuvieran 3 colas (Q1, Q2 y Q3) a cada una de estas colas se le asigna una ranura de tiempo de duración tiempo t1, entonces el algoritmo comenzará a enviar los paquetes de Q1 durante el tiempo t1, luego de eso comienza a enviar paquetes de la cola Q2 durante el mismo tiempo y finamente envía paquetes de la cola Q3 durante un mismo tiempo y si aun no termina los paquetes vuelve de nuevo a la cola Q1 y así hasta que se acabe los paquetes de las tres colas. A pesar que Round Robin tiene una mejor distribución de los labores, tiene una respuesta muy pobre con respecto al retraso de cada paquete obtenido.
 
 \subsection{Weight Round Robin (WRR)}
 Este algoritmo es una modificacion del Round Robin en el cual solo se envia un paquete por cola en cada turno, este funcionamiento se da por cada flujo en el cual se le da un peso en parte de ancho de banda, entonces, el número de paquetes a enviar en cada turno se calcula con base en el peso del flujo y en la capacidad del enlace.
 
-WRR funciona bien en el envío de paquetes de tamaño fijo, sin embargo,
-presenta problemas de desempeño en los paquetes que son de longitud variable, por ejemplo, en el caso de paquetes de tamaño mayor, este utiliza más ancho de banda de lo que deberia asignarse, lo cual hace que el desempeño en el envío de paquetes de las otras colas disminuya, un ejemplo claro de este tipo de algoritmo encontramos en los dispositivos de interconectividad Huawei en los cuales se manejan ocho colas en el que se les asigna un determinado porcentaje de ancho de banda.
+WRR funciona bien en el envío de paquetes de tamaño fijo, sin embargo, presenta problemas de desempeño en los paquetes que son de longitud variable, por ejemplo, en el caso de paquetes de tamaño mayor, este utiliza más ancho de banda de lo que debería asignarse, lo cual hace que el desempeño en el envío de paquetes de las otras colas disminuya, un ejemplo claro de este tipo de algoritmo encontramos en los dispositivos de interconectividad Huawei en los cuales se manejan ocho colas en el que se les asigna un determinado porcentaje de ancho de banda.
 
-\subsection{Deficit Round Robin}
-Este algoritmo mejora las dificultades de WRR y ahora permite enviar paquetes de diferentes longitudes, tiene dos variables, una es el \textbf{quantum} que indica la cantidad de bits a enviar en cada turno y la otra variable es el \textbf{contador de deficit} que se encarga de almacenar el valor del quantum obtenido.
+\subsection{D\'eficit Round Robin}
+Este algoritmo mejora las dificultades de WRR y ahora permite enviar paquetes de diferentes longitudes, tiene dos variables, una es el \textbf{quantum} que indica la cantidad de bits a enviar en cada turno y la otra variable es el \textbf{contador de déficit} que se encarga de almacenar el valor del quantum obtenido.
 
-El funcionamiento de este algoritmo comienza enviando paquetes de colas que tengan por mandar, si el tamaño de este paquete es menor o igual al valor del quantum, el paquete es enviado sino el paquete debe esperar a ser transmitido a otro turno, es ahi donde entra el deficit counter, lo que hace iniciar su cola e incrementa su valor por cada paquete que no es enviado debido a la condicional del quantum, cuando el deficit counter llega a su tope o limite de paquetes estas son enviadas a procesarse y el deficit counter vuelve a cero
+El funcionamiento de este algoritmo comienza enviando paquetes de colas que tengan por mandar, si el tamaño de este paquete es menor o igual al valor del quantum, el paquete es enviado sino el paquete debe esperar a ser transmitido a otro turno, es ahí donde entra el déficit counter, lo que hace iniciar su cola e incrementa su valor por cada paquete que no es enviado debido a la condicional del quantum, cuando el déficit counter llega a su tope o límite de paquetes estas son enviadas a procesarse y el déficit counter vuelve a cero.
 
-
-De acuerdo con algunos articulos cientificos el metodo Round Robin es utilizado en modelos de metodologia empirica, la cual propone un modelo matematico en una comparacion de un evento con su numero de participantes (ejemplo de una liga de futbol con su numero de participantes).
+De acuerdo con algunos artículos científicos el método Round Robin es utilizado en modelos de metodología empírica, la cual propone un modelo matemático en una comparación de un evento con su numero de participantes (ejemplo de una liga de fútbol con su número de participantes).
 
 \begin{figure}[thpb]
     \centering
     \includegraphics[width=0.55\linewidth]{tabla.png}
-    \caption{Resultados de un metodo doble Round Robin}
+    \caption{Resultados de un método doble Round Robin}
     \label{fig:tabla}
 \end{figure}
 
-Considerando el ejemplo anterior donde se utiliza el metodo doble Round Robin, el analisis de este ejemplo considera que en todo torneo o liga hay un porcentaje de desequilibrio en el balance competitivo. Algunos investigadores destacan la posibilidad de utilizar metodos estadisticas para buscar diferencias significativas entre las medias de los distintos torneos.
+Considerando el ejemplo anterior donde se utiliza el método doble Round Robin, el análisis de este ejemplo considera que en todo torneo o liga hay un porcentaje de desequilibrio en el balance competitivo. Algunos investigadores destacan la posibilidad de utilizar métodos estadísticas para buscar diferencias significativas entre las medias de los distintos torneos.
 
 \section{Metodolog\'ia o diseño del proyecto}
-El proyecto consiste en la distribucion de cargas a traves de un proceso Servidor (maestro) y los otros procesos seran aquellos que  trabajen las cargas (esclavos), para plasmar esta idea en codigo se propone hacerlo en lenguaje java donde se compondra de dos partes:
+El proyecto consiste en la distribución de cargas a través de un proceso Servidor (maestro) y los otros procesos serán aquellos que  trabajen las cargas (esclavos), para plasmar esta idea en código se propone hacerlo en lenguaje java donde se compondrá de dos partes:
 
 \begin{itemize}
-    \item \textbf{Servidor}: Se encargara de la distribucion de tareas o cargas, ademas vera que los todos los procesos esten ejecutando correctamente.
-    \item \textbf{Cliente}: Se encargara de la ejecucion de las tareas que se den y una vez resuelta esta devolvera al servidor.
+    \item \textbf{Servidor}: Se encargará de la distribución de tareas o cargas, además comprobará que los todos los procesos estén ejecutando correctamente.
+    \item \textbf{Cliente}: Se encargará de la ejecución de las tareas que se den y una vez resuelta esta devolverá al servidor.
 \end{itemize}
 
-El programa Servidor - cliente estara codificado en lenguaje java utilizando la herramienta de los sockets para la comunicacion, ya que esto nos permite mandar mensajes a otras maquinas a traves de la conexion TCP, eso quiere decir que el servidor esperara que los "esclavos" respondan para que puedan procesar sus tareas, dependiendo de lo que el Servidor les mande hacer.
+El programa Servidor - cliente estará codificado en lenguaje java utilizando la herramienta de los sockets para la comunicación, ya que esto nos permite mandar mensajes a otras máquinas a través de la conexión TCP, eso quiere decir que el servidor esperará que los "esclavos" respondan para que puedan procesar sus tareas, dependiendo de lo que el Servidor les encargue realizar.\\
+
 \section{Conclusiones}
-Se propuso la estructura y forma del proyecto, los cuales estaran en constantes pruebas para obtener una buena distribucion de cargas.\\
+Se propuso la estructura y forma del proyecto, los cuales estarán en constantes pruebas para obtener una buena distribución de cargas.\\
 
-Se propuso los metodos de Round Robin y Tabla Hash para que los procesos puedan tener una mejor eficiencia en la distribucion y ejecucion de tareas.\\
+Se propuso los métodos de Round Robin y Tabla Hash para que los procesos puedan tener una mejor eficiencia en la distribución y ejecución de tareas.\\
 
-Se mostro un modelo ejemplo de como se puede utilizar el metodo Round Robin para un caso real con probabilidades.
+Se mostró un modelo ejemplo de cómo se puede utilizar el método Round Robin para un caso real con probabilidades.
 
 \begin{thebibliography}{1}
 \normalsize
